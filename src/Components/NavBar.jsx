@@ -1,20 +1,35 @@
 
 
 import { Menu, X } from 'lucide-react'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+
 
 
 const NavBar = () => {
 
     const [isOpen , setIsOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false);
 
     const toggleHandler = () =>{
         setIsOpen(!isOpen)
     }
+
+    useEffect(() => {
+        const handleScroll = () => {
+          if (window.scrollY >= 33) {
+            setIsScrolled(true);
+          } else {
+            setIsScrolled(false);
+          }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+          window.removeEventListener("scroll", handleScroll);
+        };
+      }, []);
   return (
     <>
-    <nav className='w-full  z-50 fixed'>
+    <nav className={`w-full  z-50 fixed ${isScrolled ? 'bg-white': 'bg-transparent'}`}>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex justify-between h-[70px]'>
             <div className='flex items-center'>
@@ -24,16 +39,16 @@ const NavBar = () => {
 
             {/* desktop view */}
             <div className='md:flex hidden ml-12  items-center font-medium    gap-8'>
-                <Link className='text-gray-700 
-                transition-colors hover:text-amber-900  rounded'>Home</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>About Us</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>Our Features</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>On Sale</Link>
+                <a className='text-gray-700 
+                transition-colors hover:text-amber-900  rounded'>Home</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>About Us</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>Our Features</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>On Sale</a>
                
                
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>Our Services</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>Demo</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>Our Clients</Link>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>Our Services</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>Demo</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>Our Clients</a>
                
             </div >
 
@@ -60,17 +75,17 @@ const NavBar = () => {
       {isOpen &&(
         <div className='md:hidden'>
             <div className='px-2 flex flex-col pt-2 pb-3 space-y-1 sm:px-3 bg-white'>
-            <Link className='text-gray-700 
-                transition-colors hover:text-amber-900  rounded'>Home</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>About Us</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>Our Features</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>On Sale</Link>
+            <a className='text-gray-700 
+                transition-colors hover:text-amber-900  rounded'>Home</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>About Us</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>Our Features</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>On Sale</a>
                
                
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>Our Services</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>Demo</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>Our Clients</Link>
-                <Link className='text-gray-700 hover:text-amber-900 transition-colors'>Contact Us</Link>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>Our Services</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>Demo</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>Our Clients</a>
+                <a className='text-gray-700 hover:text-amber-900 transition-colors'>Contact Us</a>
               
                
             </div>
